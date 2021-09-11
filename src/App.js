@@ -80,30 +80,38 @@ class App extends React.Component{
     })
   }
   render(){ 
-    let listItem =  (
-      this.state.itemData.map(data=>{
-        return(
-         <ListItem text={data.item}  checked={()=>this.onCheck(data.id)} key={data.id} clicked={()=>{
-           this.deleteItem(data.id)
-         }}/>
-        )})
-    )
-    if(this.state.itemData.checked){
-      listItem = (
-      this.state.itemData.map(data=>{
-        return(
-         <ListItem text={data.item} style = {{
-           textDecoration: "line-through"}} checked={()=>this.onCheck(data.id)} key={data.id} clicked={()=>{
-           this.deleteItem(data.id)
-         }}/>
-        )}))
-    }
+    let change = this.state.itemData.map(data=>data.checked)
+    // let listItem =  (
+    //   this.state.itemData.map(data=>{
+    //     return(
+    //      <ListItem text={data.item}  checked={()=>this.onCheck(data.id)} key={data.id} clicked={()=>{
+    //        this.deleteItem(data.id)
+    //      }}/>
+    //     )})
+    // )
+    // if(this.state.itemData.checked){
+    //   listItem = (
+    //   this.state.itemData.map(data=>{
+    //     return(
+    //      <ListItem text={data.item} style = {{
+    //        textDecoration: "line-through"}} checked={()=>this.onCheck(data.id)} key={data.id} clicked={()=>{
+    //        this.deleteItem(data.id)
+    //      }}/>
+    //     )}))
+    // }
     return(
       <div>
         <input type="text" value={this.state.inputValue} onChange={this.onChange}/> 
         <button type="submit" onClick={this.addItem}>add</button>
         {
-          listItem 
+           this.state.itemData.map(data=>{
+            return(
+             <ListItem text={data.item} style={{
+               textDecoration: this.state.itemData.map(data=>data.checked) ? "line-through" : "none"}}
+              checked={()=>this.onCheck(data.id)} key={data.id} clicked={()=>{
+               this.deleteItem(data.id)
+             }}/>
+            )})
         }
       </div>   
     );
