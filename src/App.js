@@ -80,8 +80,8 @@ class App extends React.Component{
     })
   }
   render(){ 
-    let change = this.state.itemData.map(data=>data.checked)
-    // let listItem =  (
+    // let change = this.state.itemData.map(data=>data.checked)
+    // // let listItem =  (
     //   this.state.itemData.map(data=>{
     //     return(
     //      <ListItem text={data.item}  checked={()=>this.onCheck(data.id)} key={data.id} clicked={()=>{
@@ -106,8 +106,7 @@ class App extends React.Component{
         {
            this.state.itemData.map(data=>{
             return(
-             <ListItem text={data.item} style={{
-               textDecoration: this.state.itemData.map(data=>data.checked) ? "line-through" : "none"}}
+             <ListItem text={data.item} style={data.checked}
               checked={()=>this.onCheck(data.id)} key={data.id} clicked={()=>{
                this.deleteItem(data.id)
              }}/>
